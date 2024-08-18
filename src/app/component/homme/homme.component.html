@@ -1,0 +1,70 @@
+<div class="flex flex-col md:flex-row">
+  <!-- Section pour les produits récents -->
+  <div *ngIf="recentProducts.length > 0" class="w-full md:w-1/4 p-4">
+    <h2 class="text-2xl font-bold mb-4">Produits Récents</h2>
+    <div *ngIf="currentRecentProduct" class="border p-4 rounded-lg shadow">
+      <img [src]="currentRecentProduct.imageUrl" alt="{{ currentRecentProduct.name }}" class="w-full h-40 object-cover mb-2">
+      <h3 class="text-lg font-semibold">{{ currentRecentProduct.name }}</h3>
+      <p>Prix: {{ currentRecentProduct.price | currency:'GNF':'symbol' }}</p>
+      <p>Description: {{ currentRecentProduct.description }}</p>
+    </div>
+  </div>
+
+  <!-- Section pour les produits disponibles -->
+  <div class="w-full md:w-3/4 p-4">
+    <h2 class="text-2xl font-bold mb-4">Produits Homme</h2>
+
+    <!-- Menu pour sélectionner le type d'article -->
+    <div class="mb-4">
+      <label class="block text-gray-700">Type d'article:</label>
+      <select [(ngModel)]="selectedType" (change)="filterProducts()" class="w-full p-2 border rounded">
+        <option value="">Tous les types</option>
+        <option value="pantalon">Pantalon</option>
+        <option value="t-shirt">T-shirt</option>
+        <option value="chémise">Chémise</option>
+        <option value="chaussure">Chaussure</option>
+        <option value="casquette">Casquette</option>
+        <option value="cagoule">Cagoule</option>
+        <option value="lunette">Lunette</option>
+        <option value="t-shirt">T-shirt</option>
+        <option value="chémise">Chémise</option>
+      </select>
+    </div>
+
+    <!-- Liste des produits -->
+    <div *ngIf="filteredProducts.length > 0">
+      <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <li *ngFor="let product of filteredProducts" class="border p-4 rounded-lg shadow">
+          <img [src]="product.imageUrl" alt="{{ product.name }}" class="w-full h-40 object-cover mb-2">
+          <h3 class="text-lg font-semibold">{{ product.name }}</h3>
+          <p>Prix: {{ product.price | currency:'GNF': 'symbol' }}</p>
+          <p>Description: {{ product.description }}</p>
+
+          <!-- Sélection de la pointure (uniquement pour les chaussures) -->
+          <div *ngIf="product.type === 'chaussure'" class="mb-2">
+            <label class="block text-gray-700">Pointure:</label>
+            <select [(ngModel)]="selectedSizes[product.id]" class="w-full p-2 border rounded">
+              <option value="" disabled selected>Sélectionnez la pointure</option>
+              <option *ngFor="let size of ['36', '37', '38', '39', '40', '41', '42', '43', '44', '45']" [value]="size">{{ size }}</option>
+            </select>
+          </div>
+
+          <!-- Entrée du numéro de téléphone -->
+          <div class="mb-2">
+            <label class="block text-gray-700">Numéro de téléphone:</label>
+            <input type="text" [(ngModel)]="phoneNumbers[product.id]" class="w-full p-2 border rounded" placeholder="Entrez votre numéro de téléphone">
+          </div>
+
+          <!-- Bouton de commande -->
+          <button (click)="prepareOrder(product) "  class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700">Commander</button>
+
+          <!-- Bouton de suppression -->
+          <button (click)="confirmAndDeleteProduct(product)" class="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-700 mt-2">Supprimer</button>
+        </li>
+      </ul>
+    </div>
+    <div *ngIf="filteredProducts.length === 0">
+      <p>Aucun produit disponible.</p>
+    </div>
+  </div>
+</div>

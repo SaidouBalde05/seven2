@@ -1,0 +1,13 @@
+<div *ngIf="product" class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
+    <div class="bg-white p-4 rounded shadow-lg">
+      <h2 class="text-xl font-bold mb-4">Supprimer le produit</h2>
+      <p>Êtes-vous sûr de vouloir supprimer le produit "{{ product.name }}" ?</p>
+      <div class="mb-4">
+        <label class="block text-gray-700">Numéro du vendeur:</label>
+        <input type="text" class="w-full p-2 border rounded" [(ngModel)]="sellerPhoneNumber" name="sellerPhoneNumber" required>
+      </div>
+      <button (click)="deleteProduct()" class="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-700">Confirmer</button>
+      <button (click)="product = undefined" class="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-700">Annuler</button>
+    </div>
+  </div>
+  

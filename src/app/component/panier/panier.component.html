@@ -1,0 +1,21 @@
+  <div class="max-w-lg mx-auto my-4 p-4 border rounded-lg shadow">
+    <h2 class="text-xl font-bold mb-4">Panier</h2>
+    <div *ngIf="panier.length > 0">
+      <ul>
+        <li *ngFor="let item of panier" class="mb-2 p-2 border rounded flex items-center">
+          <img [src]="item.imageUrl" alt="{{ item.name }}" class="w-20 h-20 object-cover mr-4">
+          <div>
+            <h3 class="text-lg font-bold">{{ item.name }}</h3>
+            <p>Prix: {{ item.price }} GNF</p>
+            <p>Description: {{ item.description }}</p>
+          </div>
+        </li>
+      </ul>
+      <button (click)="clearPanier()" class="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-700">
+        Vider le panier
+      </button>
+    </div>
+    <div *ngIf="panier.length === 0">
+      <p>Le panier est vide.</p>
+    </div>
+  </div>

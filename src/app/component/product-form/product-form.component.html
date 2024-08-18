@@ -1,0 +1,52 @@
+      <div class="max-w-lg mx-auto my-4 p-4 border rounded-lg shadow">
+        <h2 class="text-xl font-bold mb-4">Ajouter un produit</h2>
+        <form (ngSubmit)="addProduct()" #productForm="ngForm">
+          <div class="mb-4">
+            <label class="block text-gray-700">Nom:</label>
+            <input type="text" class="w-full p-2 border rounded" [(ngModel)]="newProduct.name" name="name" required>
+          </div>
+          <div class="mb-4">
+            <label class="block text-gray-700">Prix:</label>
+            <input type="number" class="w-full p-2 border rounded" [(ngModel)]="newProduct.price" name="price" required>
+          </div>
+          <div class="mb-4">
+            <label class="block text-gray-700">Description:</label>
+            <textarea class="w-full p-2 border rounded" [(ngModel)]="newProduct.description" name="description" required></textarea>
+          </div>
+          <div class="mb-4">
+            <label class="block text-gray-700">Sélectionner une image:</label>
+            <input type="file" class="w-full p-2 border rounded" (change)="onFileSelected($event)" required>
+          </div>
+          <div class="mb-4">
+            <label class="block text-gray-700">Catégorie:</label>
+            <select class="w-full p-2 border rounded" [(ngModel)]="newProduct.category" name="category" required>
+              <option value="femme">Femme</option>
+              <option value="homme">Homme</option>
+            </select>
+          </div>
+          <div class="mb-4">
+            <label class="block text-gray-700">Type d'article:</label>
+            <select class="w-full p-2 border rounded" [(ngModel)]="newProduct.type" name="type" required>
+              <option value="pantalon">Pantalon</option>
+              <option value="t-shirt">T-shirt</option>
+              <option value="chémise">Chémise</option>
+              <option value="chaussure">Chaussure</option>
+              <option value="casquette">Casquette</option>
+              <option value="cagoule">Cagoule</option>
+              <option value="lunette">Lunette</option>
+              <option value="t-shirt">T-shirt</option>
+              <option value="chémise">Chémise</option>
+            </select>
+          </div>
+          <div class="mb-4">
+            <label class="block text-gray-700">Numéro WhatsApp du vendeur:</label>
+            <input type="text" class="w-full p-2 border rounded" [(ngModel)]="newProduct.sellerPhoneNumber" name="sellerPhoneNumber" required>
+          </div>
+          
+          <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700" [disabled]="!productForm.form.valid">
+            Ajouter
+          </button>
+        </form>
+      </div>
+      
+      

@@ -1,0 +1,35 @@
+<div class="max-w-4xl mx-auto my-4 p-4">
+  <h2 class="text-2xl font-bold mb-4">Derniers Articles Ajoutés</h2>
+
+  <h3 class="text-xl font-semibold mb-2">Produits Femme</h3>
+  <div *ngIf="recentFemmeProducts.length > 0">
+    <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+      <li *ngFor="let product of recentFemmeProducts" class="border p-4 rounded-lg shadow">
+        <img [src]="product.imageUrl" alt="{{ product.name }}" class="w-full h-40 object-cover mb-2">
+        <h3 class="text-lg font-semibold">{{ product.name }}</h3>
+        <p>Prix: {{ product.price | currency:'GNF':true }}</p>
+        <p>Description: {{ product.description }}</p>
+        <p>Catégorie: Femme</p>
+      </li>
+    </ul>
+  </div>
+  <div *ngIf="recentFemmeProducts.length === 0">
+    <p>Aucun article récent pour Femme.</p>
+  </div>
+
+  <h3 class="text-xl font-semibold mt-8 mb-2">Produits Homme</h3>
+  <div *ngIf="recentHommeProducts.length > 0">
+    <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+      <li *ngFor="let product of recentHommeProducts" class="border p-4 rounded-lg shadow">
+        <img [src]="product.imageUrl" alt="{{ product.name }}" class="w-full h-40 object-cover mb-2">
+        <h3 class="text-lg font-semibold">{{ product.name }}</h3>
+        <p>Prix: {{ product.price | currency:'GNF':true  }}</p>
+        <p>Description: {{ product.description }}</p>
+        <p>Catégorie: Homme</p>
+      </li>
+    </ul>
+  </div>
+  <div *ngIf="recentHommeProducts.length === 0">
+    <p>Aucun article récent pour Homme.</p>
+  </div>
+</div>
